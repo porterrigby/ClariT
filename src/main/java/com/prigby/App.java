@@ -17,7 +17,7 @@ public class App {
 
         tessAPI.Init("src/main/java/com/prigby/tessdata", "eng");
 
-        PIX image = pixRead(args.length > 0 ? args[0] : "src/main/java/com/prigby/tmp/test-image.png");
+        PIX image = pixRead(args.length > 0 ? args[0] : "src/main/java/com/prigby/tmp/screenshot.png");
         tessAPI.SetImage(image);
 
         outputText = tessAPI.GetUTF8Text();
