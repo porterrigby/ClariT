@@ -4,53 +4,64 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.robot.Robot;
+import javafx.stage.Screen;
 
 public class ScreenCapture extends Pane {
     private Robot robot;
     private WritableImage capturedScreen;
-    private int mouseX1, mouseX2, mouseY1, mouseY2;
-    private boolean hasBeenCropped, hasBeenShot;
+    private double mouseX1, mouseX2, mouseY1, mouseY2;
+    private boolean hasBeenShot;
 
 
     public ScreenCapture() throws IOException {
-        this.setPrefSize(2560, 1440);
         robot = new Robot();
-        hasBeenCropped = hasBeenShot = false;
+        hasBeenShot = false;
+        this.mouseX1 = Screen.getPrimary().getBounds().getMinX();
+        this.mouseY1 = Screen.getPrimary().getBounds().getMinY();
+        this.mouseX2 = Screen.getPrimary().getBounds().getMaxX();
+        this.mouseY2 = Screen.getPrimary().getBounds().getMaxY();
     }
 
-    public void cropScreen() {
-        EventHandler<MouseEvent> mouseClickHandler = (MouseEvent event) -> {handleMouseClick(event);};
-        EventHandler<MouseEvent> mouseDragHandler = (MouseEvent event) -> {handleMouseDrag(event);};
-        this.setOnMousePressed(mouseClickHandler);
-        this.setOnMouseReleased(mouseDragHandler);
+    public ScreenCapture(double mouseX1, double mouseY1, double mouseX2, double mouseY2) throws IOException {
+        robot = new Robot();
+        hasBeenShot = false;
+        this.mouseX1 = mouseX1;
+        this.mouseY1 = mouseY1;
+        this.mouseX2 = mouseX2;
+        this.mouseY2 = mouseY2;
     }
 
-    public void screenShot() {
-        if (!hasBeenCropped) {throw new RuntimeException("No screen selection was made.");}
+    public void setMouseX1(double coordinate) {
+        this.mouseX1 = coordinate;
+    }
+    public void setMouseY1(double coordinate) {
+        this.mouseX1 = coordinate;
+    }
+    public void setMouseX2(double coordinate) {
+        this.mouseX1 = coordinate;
+    }
+    public void setMouseY2(double coordinate) {
+        this.mouseX1 = coordinate;
+    }
+
+    public void screenShot() throws IOException {
+        // if (!hasBeenCropped) {throw new RuntimeException("No screen selection was made.");}
         capturedScreen = robot.getScreenCapture(null, new Rectangle2D(mouseX1, mouseY1, mouseX2, mouseY2));
+        hasBeenShot = true;
     }
 
     public void saveShot() throws IOException {
-        if (!hasBeenShot) {throw new RuntimeException("No screenshot was captured.");}
+        // if (!hasBeenShot) {throw new RuntimeException("No screenshot was captured.");}
         File outputImage = new File("./src/main/java/com/prigby/tmp/screenshot.png");
-        ImageIO.write(SwingFXUtils.fromFXImage(capturedScreen, null), "png", outputImage);    
+        ImageIO.write(SwingFXUtils.fromFXImage(capturedScreen, null), "png", outputImage);
+        hasBeenShot = false;    
     }
 
-
-    //TODO fix this shitssssVVV
-    private void handleMouseClick(MouseEvent event) {
-        mouseX1 = (int)(event.getX());
-        mouseY1 = (int)(event.getY());
-    }
-
-    private void handleMouseDrag(MouseEvent event) {
-        mouseX2 = (int)(event.getX());
-        mouseY2 = (int)(event.getY());
+    public boolean getShotStatus() {
+        return hasBeenShot;
     }
 }

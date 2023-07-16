@@ -15,8 +15,6 @@ public class App {
 
 
 
-        //TODO fix this shit vvv
-        // tessAPI.Init("C:/DevKit/TesseractOCR/tessdata-main", "eng");
         tessAPI.Init("src/main/java/com/prigby/tessdata", "eng");
 
         PIX image = pixRead(args.length > 0 ? args[0] : "src/main/java/com/prigby/tmp/test-image.png");
