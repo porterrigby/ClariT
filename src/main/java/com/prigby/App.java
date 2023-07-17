@@ -11,17 +11,19 @@ public class App {
         BytePointer outputText;
         TessBaseAPI tessAPI = new TessBaseAPI();
 
+        // Runs GrabImage to collect user-specified screenshot
         GrabImage.main(null);
 
 
-
+        // Sets traineddata folder path and language to parse
         tessAPI.Init("src/main/java/com/prigby/tessdata", "eng");
 
+        // Creates PIX images object and passes it into tesseract
         PIX image = pixRead(args.length > 0 ? args[0] : "src/main/java/com/prigby/tmp/screenshot.png");
         tessAPI.SetImage(image);
 
+        // Prints parsed text to terminal
         outputText = tessAPI.GetUTF8Text();
-
         System.out.println("OCR output:\n" + outputText.getString());
 
         tessAPI.End();
