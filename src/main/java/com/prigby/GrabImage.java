@@ -1,18 +1,13 @@
 package com.prigby;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -38,23 +33,19 @@ public class GrabImage extends Application {
         screenHeight = Screen.getPrimary().getBounds().getMaxY();
 
 
-        //XXX Event Handlers
+        //XXX Event Handler Lambdas
         EventHandler<MouseEvent> mousePressHandler = (MouseEvent event) -> {handleMousePress(event);};
         EventHandler<MouseEvent> mouseReleaseHandler = (MouseEvent event) -> {handleMouseRelease(event);};
         EventHandler<MouseEvent> mouseDragHandler = (MouseEvent event) -> {handleMouseDrag(event);};
-
-       
+      
         stage.setTitle("project-alpha");
 
-        // initial shading
+        // screen shading
         screenShade = new Rectangle(0, 0, screenWidth, screenHeight);
         screenShade.setFill(new Color(0, 0, 0, .4));
 
         group = new Group(screenShade, screenCapture);
         Scene scene = new Scene(group, screenWidth, screenHeight);
-
-        // sets color/opacity for scene
-        // scene.setFill(new Color(0, 0, 0, .3));
         scene.setFill(Color.TRANSPARENT);
 
         // assigning events to handlers
@@ -62,15 +53,12 @@ public class GrabImage extends Application {
         scene.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseReleaseHandler);
         scene.addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseDragHandler);
 
-        stage.setFullScreen(true);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setOpacity(.5);
         stage.setScene(scene);
         stage.show();
-
-
     }
 
+    //XXX Event Handler Methods
     private void handleMousePress(MouseEvent event) {
         mousePressed = true;
         x1 = event.getX();
