@@ -4,7 +4,6 @@ import org.bytedeco.javacpp.*;
 import org.bytedeco.leptonica.*;
 import org.bytedeco.tesseract.*;
 import static org.bytedeco.leptonica.global.leptonica.*;
-import static org.bytedeco.tesseract.global.tesseract.*;
 
 public class App {
     public static void main( String[] args ) {
@@ -13,7 +12,6 @@ public class App {
 
         // Runs GrabImage to collect user-specified screenshot
         GrabImage.main(null);
-
 
         // Sets traineddata folder path and language to parse
         tessAPI.Init("src/main/java/com/prigby/tessdata", "eng");
@@ -26,7 +24,9 @@ public class App {
         outputText = tessAPI.GetUTF8Text();
         System.out.println("OCR output:\n" + outputText.getString());
 
+        // Frees resources? VS Code was complaining without these.
         tessAPI.End();
+        tessAPI.close();
         outputText.deallocate();
         pixDestroy(image);
     }
