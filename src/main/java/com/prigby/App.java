@@ -22,7 +22,7 @@ public class App {
 
         // Prints parsed text to terminal
         outputText = tessAPI.GetUTF8Text();
-        System.out.println("OCR output:\n" + outputText.getString());
+        System.out.println("\nOCR output:\n" + outputText.getString());
 
         // Frees resources? VS Code was complaining without these.
         tessAPI.End();
