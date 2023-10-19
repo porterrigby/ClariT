@@ -38,7 +38,7 @@ public class GrabImage extends Application {
         EventHandler<MouseEvent> mouseReleaseHandler = (MouseEvent event) -> {handleMouseRelease(event);};
         EventHandler<MouseEvent> mouseDragHandler = (MouseEvent event) -> {handleMouseDrag(event);};
       
-        stage.setTitle("project-alpha");
+        stage.setTitle("ClariT");
 
         // screen shading
         screenShade = new Rectangle(0, 0, screenWidth, screenHeight);
