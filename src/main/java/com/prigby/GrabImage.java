@@ -18,7 +18,8 @@ public class GrabImage extends Application {
     private double x1, y1, x2, y2;
     private ScreenCapture screenCapture;
     private double screenWidth, screenHeight;
-    private Rectangle screenUnshade, screenShade;
+    private Rectangle screenShade1, screenShade2, screenShade3, screenShade4; 
+    private Rectangle screenShade5, screenShade6, screenShade7, screenShade8;
     private Group group;
 
     public static void main( String[] args ) {
@@ -38,13 +39,28 @@ public class GrabImage extends Application {
         EventHandler<MouseEvent> mouseReleaseHandler = (MouseEvent event) -> {handleMouseRelease(event);};
         EventHandler<MouseEvent> mouseDragHandler = (MouseEvent event) -> {handleMouseDrag(event);};
       
-        stage.setTitle("project-alpha");
+        stage.setTitle("ClariT");
 
         // screen shading
-        screenShade = new Rectangle(0, 0, screenWidth, screenHeight);
-        screenShade.setFill(new Color(0, 0, 0, .4));
+        screenShade1 = new Rectangle(0, 0, screenWidth, screenHeight);
+        screenShade1.setFill(new Color(1, 1, 1, .4));
+        screenShade2 = new Rectangle(0, 0, 0, 0);
+        screenShade2.setFill(new Color(1, 1, 1, .4));
+        screenShade3 = new Rectangle(0, 0, 0, 0);
+        screenShade3.setFill(new Color(1, 1, 1, .4));
+        screenShade4 = new Rectangle(0, 0, 0, 0);
+        screenShade4.setFill(new Color(1, 1, 1, .4));
+        screenShade5 = new Rectangle(0, 0, 0, 0);
+        screenShade5.setFill(new Color(1, 1, 1, .4));
+        screenShade6 = new Rectangle(0, 0, 0, 0);
+        screenShade6.setFill(new Color(1, 1, 1, .4));
+        screenShade7 = new Rectangle(0, 0, 0, 0);
+        screenShade7.setFill(new Color(1, 1, 1, .4));
+        screenShade8 = new Rectangle(0, 0, 0, 0);
+        screenShade8.setFill(new Color(1, 1, 1, .4));
 
-        group = new Group(screenShade, screenCapture);
+        group = new Group(screenShade1, screenShade2, screenShade3, screenShade4,
+                            screenShade5, screenShade6, screenShade7, screenShade8, screenCapture);
         Scene scene = new Scene(group, screenWidth, screenHeight);
         scene.setFill(Color.TRANSPARENT);
 
@@ -63,10 +79,6 @@ public class GrabImage extends Application {
         mousePressed = true;
         x1 = event.getX();
         y1 = event.getY();
-
-        screenUnshade = new Rectangle(x1, y1, 0, 0);
-        screenUnshade.setFill(new Color(1, 1, 1, .3));
-        group.getChildren().setAll(screenUnshade, screenShade, screenCapture);
 
         screenCapture.setMouseX1(x1);
         screenCapture.setMouseY1(y1);
@@ -94,8 +106,77 @@ public class GrabImage extends Application {
 
     private void handleMouseDrag(MouseEvent event) {
         if (mousePressed) {
-            screenUnshade.setWidth(event.getX()-x1);
-            screenUnshade.setHeight(event.getY()-y1);
+            // TODO implement unshades
+            screenShade1.setX(0);
+            screenShade1.setY(0);
+            if (x1 < event.getX()) {
+                screenShade1.setWidth(x1);
+            } else {
+                screenShade1.setWidth(event.getX());
+            }
+
+            if (y1 < event.getY()) {
+                screenShade1.setHeight(y1);
+            } else {
+                screenShade1.setHeight(event.getY());
+            }
+
+            // screenShade2.setX(event.getX());
+            // screenShade2.setY(0);
+            // screenShade2.setWidth(event.getX()-x1);
+            // screenShade2.setHeight(y1);
+            
+            screenShade3.setX(event.getX());
+            screenShade3.setY(0);
+            if (x1 < event.getX()) {
+                screenShade3.setWidth(screenWidth-event.getX());
+            } else {
+                screenShade3.setX(x1);
+                screenShade3.setWidth(screenWidth-x1);
+            }
+
+            if (y1 < event.getY()) {
+                screenShade3.setHeight(y1);
+            } else {
+                screenShade3.setHeight(event.getY());
+            }
+
+
+
+            screenShade5.setX(event.getX());
+            screenShade5.setY(event.getY());
+            if (x1 < event.getX()) {
+                screenShade5.setWidth(screenWidth-event.getX());
+            } else {
+                screenShade5.setX(x1);
+                screenShade5.setWidth(screenWidth-x1);
+            }
+
+            if (y1 < event.getY()) {
+                screenShade5.setHeight(screenHeight-event.getY());
+            } else {
+                screenShade5.setY(y1);
+                screenShade5.setHeight(screenHeight-y1);
+            }
+
+            screenShade7.setX(0);
+            screenShade7.setY(event.getY());
+            if (x1 < event.getX()) {
+                screenShade7.setWidth(x1);
+            } else {
+                screenShade7.setWidth(event.getX());
+            }
+
+            if (y1 < event.getY()) {
+                screenShade7.setHeight(screenHeight-event.getY());
+            } else {
+                screenShade7.setY(y1);
+                screenShade7.setHeight(screenHeight-y1);
+            }
+
+
+
+
         }
     }
 }
