@@ -107,6 +107,8 @@ public class GrabImage extends Application {
     private void handleMouseDrag(MouseEvent event) {
         if (mousePressed) {
             // TODO implement unshades
+
+            // top left box
             screenShade1.setX(0);
             screenShade1.setY(0);
             if (x1 < event.getX()) {
@@ -121,11 +123,25 @@ public class GrabImage extends Application {
                 screenShade1.setHeight(event.getY());
             }
 
-            // screenShade2.setX(event.getX());
-            // screenShade2.setY(0);
-            // screenShade2.setWidth(event.getX()-x1);
-            // screenShade2.setHeight(y1);
-            
+
+            // top middle box
+            screenShade2.setX(x1);
+            screenShade2.setY(0);
+            if (x1 < event.getX()) {
+                screenShade2.setWidth(event.getX()-x1);
+            } else {
+                screenShade2.setX(event.getX());
+                screenShade2.setWidth(x1-event.getX());
+            }
+
+            if (y1 < event.getY()) {
+                screenShade2.setHeight(y1);
+            } else {
+                screenShade2.setHeight(event.getY());
+            }
+
+           
+            // top right box
             screenShade3.setX(event.getX());
             screenShade3.setY(0);
             if (x1 < event.getX()) {
@@ -142,7 +158,25 @@ public class GrabImage extends Application {
             }
 
 
+            // middle right box
+            screenShade4.setX(event.getX());
+            screenShade4.setY(y1);
+            if (x1 < event.getX()) {
+                screenShade4.setWidth(screenWidth-event.getX());
+            } else {
+                screenShade4.setX(x1);
+                screenShade4.setWidth(screenWidth-x1);
+            }
 
+            if (y1 < event.getY()) {
+                screenShade4.setHeight(event.getY()-y1);
+            } else {
+                screenShade4.setY(event.getY());
+                screenShade4.setHeight(y1-event.getY());
+            }
+
+
+            // bottom right box
             screenShade5.setX(event.getX());
             screenShade5.setY(event.getY());
             if (x1 < event.getX()) {
@@ -159,6 +193,26 @@ public class GrabImage extends Application {
                 screenShade5.setHeight(screenHeight-y1);
             }
 
+
+            // bottom middle box
+            screenShade6.setX(x1);
+            screenShade6.setY(event.getY());
+            if (x1 < event.getX()) {
+                screenShade6.setWidth(event.getX()-x1);
+            } else {
+                screenShade6.setX(event.getX());
+                screenShade6.setWidth(x1-event.getX());
+            }
+
+            if (y1 < event.getY()) {
+                screenShade6.setHeight(screenHeight-event.getY());
+            } else {
+                screenShade6.setY(y1);
+                screenShade6.setHeight(screenHeight-y1);
+            }
+
+
+            // bottom left box
             screenShade7.setX(0);
             screenShade7.setY(event.getY());
             if (x1 < event.getX()) {
@@ -175,8 +229,21 @@ public class GrabImage extends Application {
             }
 
 
+            // middle left box
+            screenShade8.setX(0);
+            screenShade8.setY(y1);
+            if (x1 < event.getX()) {
+                screenShade8.setWidth(x1);
+            } else {
+                screenShade8.setWidth(event.getX());
+            }
 
-
+            if (y1 < event.getY()) {
+                screenShade8.setHeight(event.getY()-y1);
+            } else {
+                screenShade8.setY(event.getY());
+                screenShade8.setHeight(y1-event.getY());
+            }
         }
     }
 }
