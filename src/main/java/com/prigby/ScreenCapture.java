@@ -13,68 +13,68 @@ import javafx.stage.Screen;
 public class ScreenCapture extends Pane {
     private Robot robot;
     private WritableImage capturedScreen;
-    private int mouseX1, mouseX2, mouseY1, mouseY2;
+    private double X1, X2, Y1, Y2;
     private boolean hasBeenShot;
 
 
     public ScreenCapture() throws IOException {
         robot = new Robot();
         hasBeenShot = false;
-        this.mouseX1 = (int)Screen.getPrimary().getBounds().getMinX();
-        this.mouseY1 = (int)Screen.getPrimary().getBounds().getMinY();
-        this.mouseX2 = (int)Screen.getPrimary().getBounds().getMaxX();
-        this.mouseY2 = (int)Screen.getPrimary().getBounds().getMaxY();
+        this.X1 = (int)Screen.getPrimary().getBounds().getMinX();
+        this.Y1 = (int)Screen.getPrimary().getBounds().getMinY();
+        this.X2 = (int)Screen.getPrimary().getBounds().getMaxX();
+        this.Y2 = (int)Screen.getPrimary().getBounds().getMaxY();
     }
 
-    public ScreenCapture(double mouseX1, double mouseY1, double mouseX2, double mouseY2) throws IOException {
+    public ScreenCapture(int X1, int Y1, int X2, int Y2) throws IOException {
         robot = new Robot();
         hasBeenShot = false;
-        this.mouseX1 = (int)mouseX1;
-        this.mouseY1 = (int)mouseY1;
-        this.mouseX2 = (int)mouseX2;
-        this.mouseY2 = (int)mouseY2;
+        this.X1 = X1;
+        this.Y1 = Y1;
+        this.X2 = X2;
+        this.Y2 = Y2;
     }
 
-    public void setMouseX1(double coordinate) {
-        this.mouseX1 = (int)coordinate;
+    public void setX1(double coordinate) {
+        this.X1 = coordinate;
     }
-    public void setMouseY1(double coordinate) {
-        this.mouseY1 = (int)coordinate;
+    public void setY1(double coordinate) {
+        this.Y1 = coordinate;
     }
-    public void setMouseX2(double coordinate) {
-        this.mouseX2 = (int)coordinate;
+    public void setX2(double coordinate) {
+        this.X2 = coordinate;
     }
-    public void setMouseY2(double coordinate) {
-        this.mouseY2 = (int)coordinate;
-    }
-
-    public int getMouseX1() {
-        return mouseX1;
+    public void setY2(double coordinate) {
+        this.Y2 = coordinate;
     }
 
-    public int getMouseY1() {
-        return mouseY1;
+    public double getX1() {
+        return X1;
     }
 
-    public int getMouseX2() {
-        return mouseX2;
+    public double getY1() {
+        return Y1;
     }
 
-    public int getMouseY2() {
-        return mouseY2;
+    public double getX2() {
+        return X2;
     }
 
-    private int getShotWidth() {
-        return Math.abs(getMouseX2()-getMouseX1());
+    public double getY2() {
+        return Y2;
     }
 
-    private int getShotHeight() {
-        return Math.abs(getMouseY2()-getMouseY1());
+    private double getShotWidth() {
+        return Math.abs(getX2()-getX1());
+    }
+
+    private double getShotHeight() {
+        return Math.abs(getY2()-getY1());
     }
 
     public void screenShot() throws IOException {
-        Rectangle2D region = new Rectangle2D(getMouseX1(), getMouseY1(), getShotWidth(), getShotHeight());
-        capturedScreen = robot.getScreenCapture(null, region, true);
+        Rectangle2D region = new Rectangle2D(getX1(), getY1(), getShotWidth(), getShotHeight());
+        capturedScreen = robot.getScreenCapture(null, region, false);
         hasBeenShot = true;
     }
 

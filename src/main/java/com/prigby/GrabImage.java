@@ -43,21 +43,14 @@ public class GrabImage extends Application {
 
         // screen shading
         screenShade1 = new Rectangle(0, 0, screenWidth, screenHeight);
-        screenShade1.setFill(new Color(1, 1, 1, .4));
         screenShade2 = new Rectangle(0, 0, 0, 0);
-        screenShade2.setFill(new Color(1, 1, 1, .4));
         screenShade3 = new Rectangle(0, 0, 0, 0);
-        screenShade3.setFill(new Color(1, 1, 1, .4));
         screenShade4 = new Rectangle(0, 0, 0, 0);
-        screenShade4.setFill(new Color(1, 1, 1, .4));
         screenShade5 = new Rectangle(0, 0, 0, 0);
-        screenShade5.setFill(new Color(1, 1, 1, .4));
         screenShade6 = new Rectangle(0, 0, 0, 0);
-        screenShade6.setFill(new Color(1, 1, 1, .4));
         screenShade7 = new Rectangle(0, 0, 0, 0);
-        screenShade7.setFill(new Color(1, 1, 1, .4));
         screenShade8 = new Rectangle(0, 0, 0, 0);
-        screenShade8.setFill(new Color(1, 1, 1, .4));
+        turnOnTargetShaders();
 
         group = new Group(screenShade1, screenShade2, screenShade3, screenShade4,
                             screenShade5, screenShade6, screenShade7, screenShade8, screenCapture);
@@ -79,20 +72,30 @@ public class GrabImage extends Application {
         mousePressed = true;
         x1 = event.getX();
         y1 = event.getY();
-
-        screenCapture.setMouseX1(x1);
-        screenCapture.setMouseY1(y1);
-        // System.out.println("\nx1: " + x1 + "\ny1: " + y1);
     }
     
     private void handleMouseRelease(MouseEvent event) {
         if (!mousePressed) {throw new RuntimeException("Mouse not pressed.");}
         x2 = event.getX();
         y2 = event.getY();
-        screenCapture.setMouseX2(x2);
-        screenCapture.setMouseY2(y2);
-        // System.out.println("x2: " + x2 + "\ny2: " + y2);
-        // System.out.println();
+        turnOffTargetShaders();
+
+        if (x1 < x2) { // If cursor is dragged top left to bottom right
+            screenCapture.setX1(x1);
+            screenCapture.setX2(x2);
+        } else { // If cursor is dragged bottom right to top left
+            screenCapture.setX1(x2);
+            screenCapture.setX2(x1);
+        }
+
+        if (y1 < y2) {
+            screenCapture.setY1(y1-16);
+            screenCapture.setY2(y2-16);
+        } else {
+            screenCapture.setY1(y2-16);
+            screenCapture.setY2(y1-16);
+        }
+
         try {
             screenCapture.screenShot();
             screenCapture.saveShot();
@@ -106,8 +109,6 @@ public class GrabImage extends Application {
 
     private void handleMouseDrag(MouseEvent event) {
         if (mousePressed) {
-            // TODO implement unshades
-
             // top left box
             screenShade1.setX(0);
             screenShade1.setY(0);
@@ -244,6 +245,31 @@ public class GrabImage extends Application {
                 screenShade8.setY(event.getY());
                 screenShade8.setHeight(y1-event.getY());
             }
+
         }
+    }
+
+    private void turnOffTargetShaders() {
+
+        screenShade1.setFill(new Color(0, 0, 0, .4));
+        screenShade2.setFill(new Color(0, 0, 0, .4));
+        screenShade3.setFill(new Color(0, 0, 0, .4));
+        screenShade4.setFill(new Color(0, 0, 0, .4));
+        screenShade5.setFill(new Color(0, 0, 0, .4));
+        screenShade6.setFill(new Color(0, 0, 0, .4));
+        screenShade7.setFill(new Color(0, 0, 0, .4));
+        screenShade8.setFill(new Color(0, 0, 0, .4));
+    }
+
+    private void turnOnTargetShaders() {
+
+        screenShade1.setFill(new Color(1, 1, 1, .4));
+        screenShade2.setFill(new Color(1, 1, 1, .4));
+        screenShade3.setFill(new Color(1, 1, 1, .4));
+        screenShade4.setFill(new Color(1, 1, 1, .4));
+        screenShade5.setFill(new Color(1, 1, 1, .4));
+        screenShade6.setFill(new Color(1, 1, 1, .4));
+        screenShade7.setFill(new Color(1, 1, 1, .4));
+        screenShade8.setFill(new Color(1, 1, 1, .4));
     }
 }
