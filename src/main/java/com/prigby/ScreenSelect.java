@@ -13,7 +13,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class GrabImage extends Application {
+public class ScreenSelect extends Application {
     private final int MOUSE_Y_OFFSET = 16;
     private boolean mousePressed;
     private double x1, y1, x2, y2;
