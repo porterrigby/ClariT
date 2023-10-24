@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class GrabImage extends Application {
+    private final int MOUSE_Y_OFFSET = 17;
     private boolean mousePressed;
     private double x1, y1, x2, y2;
     private ScreenCapture screenCapture;
@@ -89,11 +90,11 @@ public class GrabImage extends Application {
         }
 
         if (y1 < y2) {
-            screenCapture.setY1(y1-16);
-            screenCapture.setY2(y2-16);
+            screenCapture.setY1(y1-MOUSE_Y_OFFSET);
+            screenCapture.setY2(y2-MOUSE_Y_OFFSET);
         } else {
-            screenCapture.setY1(y2-16);
-            screenCapture.setY2(y1-16);
+            screenCapture.setY1(y2-MOUSE_Y_OFFSET);
+            screenCapture.setY2(y1-MOUSE_Y_OFFSET);
         }
 
         try {
