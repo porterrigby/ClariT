@@ -252,25 +252,25 @@ public class ScreenSelect extends Application {
 
     private void turnOffTargetShaders() {
 
-        screenShade1.setFill(new Color(0, 0, 0, .4));
-        screenShade2.setFill(new Color(0, 0, 0, .4));
-        screenShade3.setFill(new Color(0, 0, 0, .4));
-        screenShade4.setFill(new Color(0, 0, 0, .4));
-        screenShade5.setFill(new Color(0, 0, 0, .4));
-        screenShade6.setFill(new Color(0, 0, 0, .4));
-        screenShade7.setFill(new Color(0, 0, 0, .4));
-        screenShade8.setFill(new Color(0, 0, 0, .4));
+        screenShade1.setFill(new Color(0, 0, 0, .0));
+        screenShade2.setFill(new Color(0, 0, 0, .0));
+        screenShade3.setFill(new Color(0, 0, 0, .0));
+        screenShade4.setFill(new Color(0, 0, 0, .0));
+        screenShade5.setFill(new Color(0, 0, 0, .0));
+        screenShade6.setFill(new Color(0, 0, 0, .0));
+        screenShade7.setFill(new Color(0, 0, 0, .0));
+        screenShade8.setFill(new Color(0, 0, 0, .0));
     }
 
     private void turnOnTargetShaders() {
 
-        screenShade1.setFill(new Color(1, 1, 1, .4));
-        screenShade2.setFill(new Color(1, 1, 1, .4));
-        screenShade3.setFill(new Color(1, 1, 1, .4));
-        screenShade4.setFill(new Color(1, 1, 1, .4));
-        screenShade5.setFill(new Color(1, 1, 1, .4));
-        screenShade6.setFill(new Color(1, 1, 1, .4));
-        screenShade7.setFill(new Color(1, 1, 1, .4));
-        screenShade8.setFill(new Color(1, 1, 1, .4));
+        screenShade1.setFill(new Color(0, 0, 0, .5));
+        screenShade2.setFill(new Color(0, 0, 0, .5));
+        screenShade3.setFill(new Color(0, 0, 0, .5));
+        screenShade4.setFill(new Color(0, 0, 0, .5));
+        screenShade5.setFill(new Color(0, 0, 0, .5));
+        screenShade6.setFill(new Color(0, 0, 0, .5));
+        screenShade7.setFill(new Color(0, 0, 0, .5));
+        screenShade8.setFill(new Color(0, 0, 0, .5));
     }
 }
